@@ -5,6 +5,9 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'org.jetbrains.kotlin.jvm' version '1.7.21'
 	id 'org.jetbrains.kotlin.plugin.spring' version '1.7.21'
+
+	// for flyway
+	id 'org.flywaydb.flyway' version '8.2.0'
 }
 
 group = 'com.example'
@@ -21,6 +24,10 @@ dependencies {
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// for flyway
+	implementation 'mysql:mysql-connector-java:8.0.23'
+	implementation 'org.flywaydb:flyway-core'
 }
 
 tasks.withType(KotlinCompile) {
@@ -32,4 +39,10 @@ tasks.withType(KotlinCompile) {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+flyway {
+	url = "jdbc:mysql://127.0.0.1:3306/example"
+	user = "root"
+	password = "mysql"
 }
